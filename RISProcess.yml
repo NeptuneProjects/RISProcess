@@ -11,3 +11,6 @@ dependencies:
   - pandas
   - scipy
   - tqdm
+  - pip
+  - pip:
+    - git+https://github.com/NeptuneProjects/RISProcess.git
