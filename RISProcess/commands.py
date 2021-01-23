@@ -41,7 +41,7 @@ def cleancat():
     parser.add_argument("source", help="Path to catalogue to be processed.")
     parser.add_argument("--dest", help="Path to save new catalogue.")
     parser.add_argument("--window", type=float, help="Removal window (s)")
-    args = parse_args()
+    args = parser.parse_args()
     clean_catalogue(**vars(args))
 
 
