@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+"""Command line tools for RISProcess
+
+William Jenkins, wjenkins [at] ucsd [dot] edu
+Scripps Institution of Oceanography, UC San Diego
+January 2021
+"""
 import argparse
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from copy import deepcopy
