@@ -197,7 +197,7 @@ def clean_catalogue(
             count += len(remove)
         print(f"Removing {count} entries...")
         rm_idx = [item for sub_idx in rm_idx for item in sub_idx]
-        catalogue.drop(catalogue.index[tuple(rm_idx)], inplace=True)
+        catalogue.drop(catalogue.index[[tuple(rm_idx)]], inplace=True)
         catalogue.reset_index(drop=True, inplace=True)
     catalogue.to_csv(dest)
     print(f"Catalogue saved to {dest}.")
