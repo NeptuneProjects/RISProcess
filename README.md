@@ -17,8 +17,10 @@ The following steps will set up a Conda environment and install RISProcess.
 1. Open a terminal and navigate to the directory you would like to download the
  **RISProcess.yml** environment file.
 2. Save **RISProcess.yml** to your computer by running the following:
-  <br>a. Mac: `curl -LJO https://raw.githubusercontent.com/NeptuneProjects/RISProcess/master/RISProcess.yml`
-  <br>b. Linux: `wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/NeptuneProjects/RISProcess/master/RISProcess.yml`
+  <br>a. **Mac**:
+  <br>`curl -LJO https://raw.githubusercontent.com/NeptuneProjects/RISProcess/master/RISProcess.yml`
+  <br>b. **Linux**:
+  <br>`wget --no-check-certificate --content-disposition https://raw.githubusercontent.com/NeptuneProjects/RISProcess/master/RISProcess.yml`
 3. In terminal, run: `conda env create -f RISProcess.yml`
 4. Once the environment is set up and the package is installed, activate your
 environment by running `conda activate RISProcess` in terminal.
