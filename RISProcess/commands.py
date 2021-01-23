@@ -8,7 +8,7 @@ from datetime import datetime
 import pandas as pd
 from tqdm import tqdm
 
-from RISProcess import io
+from RISProcess.io import config
 from RISProcess import workflows
 from RISProcess.processing import SignalProcessing
 
