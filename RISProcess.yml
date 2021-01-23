@@ -1,4 +1,4 @@
-name: SeismicProcessing
+name: RISProcess
 channels:
   - conda-forge
   - defaults
