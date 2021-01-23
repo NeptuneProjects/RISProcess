@@ -1,0 +1,13 @@
+name: SeismicProcessing
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - h5py
+  - jupyterlab
+  - numpy
+  - obspy
+  - pandas
+  - scipy
+  - tqdm
