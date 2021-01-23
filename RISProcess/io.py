@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-'''Database & workflow I/O functions.
+"""Database & workflow I/O functions.
 
 William Jenkins, wjenkins [at] ucsd [dot] edu
 Scripps Institution of Oceanography, UC San Diego
 January 2021
-'''
+"""
 import configparser
 import json
 import os
@@ -16,7 +16,7 @@ import pandas as pd
 
 
 def config(mode, path=".", parameters=None):
-    '''Writes or reads configuration file for RISProcess.
+    """Writes or reads configuration file for RISProcess.
 
     Parameters
     ----------
@@ -37,8 +37,7 @@ def config(mode, path=".", parameters=None):
 
     parameters : dict
         In read mode, returns dictionary of formatted config parameters.
-
-    '''
+    """
     if mode == "w":
         if parameters is not None:
             config = configparser.ConfigParser()
@@ -56,12 +55,12 @@ def config(mode, path=".", parameters=None):
             "taper": "float",
             "prefeed": "float",
             "fs2": "float",
-            "cutoff": "float",
+            "cutoff": "arrayfloat",
             "T_seg": "float",
             "NFFT": "int",
             "tpersnap": "float",
             "overlap": "float",
-            "prefilt": "float",
+            "prefilt": "arrayfloat",
             "waterlevel": "float",
             "STA": "float",
             "LTA": "float",
@@ -77,10 +76,14 @@ def config(mode, path=".", parameters=None):
         parameters = dict()
         for key, value in config["PARAMETERS"].items():
             if key in dict_of_dtypes.keys():
-                if dict_of_dtypes[key] == "float":
+                if dict_of_dtypes[key] == 'float':
                     parameters[key] = float(config["PARAMETERS"][key])
-                elif dict_of_dtypes[key] == "int":
+                elif dict_of_dtypes[key] == 'int':
                     parameters[key] = int(config["PARAMETERS"][key])
+                elif dict_of_keys[key] == 'arrayfloat':
+                    parameters[key] = [float(i) for i in config['PARAMETERS'][key].split(', ')]
+                elif dict_of_keys[key] == 'arrayfloat':
+                    parameters[key] = [int(i) for i in config['PARAMETERS'][key].split(', ')]
             else:
                 parameters[key] = value
         return parameters
@@ -105,10 +108,10 @@ def init_h5datasets(params):
 
 
 def make_h5datasets(T_seg, NFFT, tpersnap, fs, group_name, overlap):
-    '''Defines the structure of the .h5 database; h5py package required.
+    """Defines the structure of the .h5 database; h5py package required.
     Of note, pay special attention to the dimensions of the chunked data. By
     anticipating the output data dimensions, one can chunk the saved data on
-    disk accordingly, making the reading process go much more quickly.'''
+    disk accordingly, making the reading process go much more quickly."""
     # Set up dataset for traces:
     m = 0
     n = 199

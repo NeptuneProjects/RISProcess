@@ -14,7 +14,7 @@ from RISProcess.processing import SignalProcessing
 
 
 def process():
-    '''This command line function, processes, and saves raw MSEED seismic data.
+    """This command line function, processes, and saves raw MSEED seismic data.
     Functions available allow for filtering, decimation, and instrument
     response removal. Single- and multi-core processing are available.
     Parameters are passed to the function through a config file.
@@ -24,7 +24,7 @@ def process():
     path : command line input
         This command-line function requires as input the path to the saved
         configuration file.
-    '''
+    """
     parser = argparse.ArgumentParser(
         description="Command-line tool for processing RIS seismic data."
     )

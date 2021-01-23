@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-'''Seismic signal processing workflows.
+"""Seismic signal processing workflows.
 
 William Jenkins, wjenkins [at] ucsd [dot] edu
 Scripps Institution of Oceanography, UC San Diego
 December 2020
-'''
+"""
 from copy import deepcopy
 import os
 # import warnings
@@ -86,7 +86,7 @@ def build_h5(params):
 
 
 def process_data(params):
-    '''Provides end-to-end signal processing, including reading, detrending,
+    """Provides end-to-end signal processing, including reading, detrending,
     tapering, filtering, instrument response removal, and saving.
 
     Parameters
@@ -98,7 +98,7 @@ def process_data(params):
     -------
     int
         Number of files saved to disk.
-    '''
+    """
     # warnings.simplefilter("ignore", category=InternalMSEEDReadingWarning)
     st = processing.pipeline(params)
 

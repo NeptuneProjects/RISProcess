@@ -1,9 +1,9 @@
-'''Seismic signal processing classes and functions.
+"""Seismic signal processing classes and functions.
 
 William Jenkins, wjenkins [at] ucsd [dot] edu
 Scripps Institution of Oceanography, UC San Diego
 December 2020
-'''
+"""
 from datetime import datetime
 
 import numpy as np
@@ -89,7 +89,7 @@ class SignalProcessing():
 
 
     def update_times(self, start, stop):
-        '''Updates time specifications.
+        """Updates time specifications.
 
         Parameters
         ----------
@@ -108,7 +108,7 @@ class SignalProcessing():
         The intended use case of this function is to allow for iterative
         updates to the dates/times of interest, without having to specify the
         signal processing parameters with each iteration.
-        '''
+        """
         self.start = pd.Timestamp(start)
         self.stop = pd.Timestamp(stop)
 
@@ -165,7 +165,7 @@ def clean_catalogue(
         dest=f"{pd.Timestamp.now().strftime('%y%m%d%H%M%S')}.csv",
         window=None
     ):
-    '''Removes duplicate entries in detection catalogue and sorts events by
+    """Removes duplicate entries in detection catalogue and sorts events by
     datetime.
 
     Parameters
@@ -177,7 +177,7 @@ def clean_catalogue(
     window : float
         Window (s) from previous detection in which subsequent detections will
         be removed.
-    '''
+    """
     catalogue = pd.read_csv(source, parse_dates=[3,4,5])
     catalogue.drop_duplicates(ignore_index=True, inplace=True)
     catalogue.sort_values(by=["dt_on"], ignore_index=True, inplace=True)
@@ -206,7 +206,7 @@ def clean_catalogue(
 
 
 def clean_detections(npts, on_off):
-    '''Removes spurious seismic detections that occur within a window following
+    """Removes spurious seismic detections that occur within a window following
     a detection.
 
     Parameters
@@ -220,7 +220,7 @@ def clean_detections(npts, on_off):
     -------
     array
         Corrected on/off indexes.
-    '''
+    """
     on = on_off[:,0]
     off = on_off[:,1]
     idx_on = [on[0]]
@@ -251,7 +251,7 @@ def collect_results(future, params):
 
 
 def decimate_to_fs2(st, fs2):
-    '''Decimates traces in stream to a common sampling rate.
+    """Decimates traces in stream to a common sampling rate.
 
     Parameters
     ----------
@@ -265,7 +265,7 @@ def decimate_to_fs2(st, fs2):
     -------
     st : Stream
         Obspy object containing seismic traces read from disk.
-    '''
+    """
     if fs2 is not None:
         for tr in st:
             fs = tr.stats.sampling_rate
@@ -311,7 +311,7 @@ def pipeline(params):
 
 
 def read_stationXML(sourcepath, network, station):
-    '''Reads seismic station XML file.
+    """Reads seismic station XML file.
 
     Parameters
     ----------
@@ -326,14 +326,14 @@ def read_stationXML(sourcepath, network, station):
     -------
     inv : Inventory
         Obspy Inventory object; contains instrument response information.
-    '''
+    """
     filespec = f"{network}.{station}.xml"
     inv = read_inventory(f"{sourcepath}/StationXML/{filespec}")
     return inv
 
 
 def read_stream(params):
-    '''Reads MSEED data from file according to search parameters specified in
+    """Reads MSEED data from file according to search parameters specified in
     params.
 
     Parameters
@@ -347,7 +347,7 @@ def read_stream(params):
         Obspy object containing seismic traces read from disk.
     -1 : int
         Returned if no files were read.
-    '''
+    """
     start_search = params.start_processing.floor('D')
     stop_search = params.stop_processing.floor('D')
     dts = pd.date_range(start_search, stop_search)
@@ -382,7 +382,7 @@ def read_stream(params):
 
 
 def remove_gap_traces(st):
-    '''Searches for gaps in seismic data and removes affected traces from
+    """Searches for gaps in seismic data and removes affected traces from
     stream.
 
     Parameters
@@ -400,7 +400,7 @@ def remove_gap_traces(st):
     Without this function in the workflow, interpolation/gap-filling methods
     can cause discontinuities in the data, which leads to delta functions
     during filtering and instrument response removal.
-    '''
+    """
     # Check 1:
     gaps = st.get_gaps()
     for i in range(len(gaps)):
