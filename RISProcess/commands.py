@@ -25,6 +25,7 @@ def process():
         This command-line function requires as input the path to the saved
         configuration file.
     """
+    tic = datetime.now()
     parser = argparse.ArgumentParser(
         description="Command-line tool for processing RIS seismic data."
     )
