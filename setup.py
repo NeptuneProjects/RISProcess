@@ -7,6 +7,7 @@ def setup_package():
         author="William F. Jenkins II",
         author_email="wjenkins@ucsd.edu",
         packages=["RISProcess"],
+        scripts=["scripts/testscript.py", "scripts/testscripts2.py"]
         install_requires=[
             "h5py",
             "jupyterlab",
