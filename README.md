@@ -11,10 +11,11 @@ Details on the clustering project are available in [Jenkins et al.](https://www.
 Information on the data set can be found at [FDSN](https://www.fdsn.org/networks/detail/XH_2014/). The project is documented in [Bromirski et al.](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015GL065284)
 
 ## Installation
-### Mac & Linux
 Pre-requisites:
 [Anaconda](https://anaconda.org) or
 [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+
+Tested on MacOS 11.1 and Red Hat Enterprise Linux 7.9.
 
 The following steps will set up a Conda environment and install RISProcess.
 1. Open a terminal and navigate to the directory you would like to download the
