@@ -1,4 +1,6 @@
+============
 # RISProcess
+============
 RISProcess is a Python package designed to download, process, and save seismic
 data that were collected on the Ross Ice Shelf (RIS), Antarctica, from 2014-
 2017.  The package is built using [Obspy](https://docs.obspy.org), h5py, and a
