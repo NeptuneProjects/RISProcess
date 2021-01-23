@@ -12,8 +12,7 @@ def setup_package():
         # scripts=["scripts/testscript.py", "scripts/testscript2.py"],
         entry_points = {
             'console_scripts': [
-                'test1=RISProcess.commands:test1',
-                'test2=RISProcess.commands:test2'
+                'process=RISProcess.commands:process'
             ]
         },
         install_requires=[

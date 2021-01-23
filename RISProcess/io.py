@@ -15,14 +15,41 @@ import numpy as np
 import pandas as pd
 
 
-def config(parameters, mode):
+def config(mode, path=".", parameters=None):
+    '''Writes or reads configuration file for RISProcess.
+
+    Parameters
+    ----------
+    mode : str
+        Sets function to write mode ["w"] or read mode ["r"]
+
+    path : str
+        Sets path to write or read file (default: cwd).
+
+    parameters : dict
+        Dictionary containing configuration parameters to write; required for
+        write mode (default: None).
+
+    Returns
+    -------
+    fname : str
+        In write mode, returns path to saved config file.
+
+    parameters : dict
+        In read mode, returns dictionary of formatted config parameters.
+
+    '''
     if mode == "w":
-        config = configparser.ConfigParser()
-        config["PARAMETERS"] = parameters
-        fname = f"{parameters['path']}/config_{parameters['mode']}.ini"
-        with open(fname, "w") as configfile:
-            config.write(configfile)
-        return fname
+        if parameters is not None:
+            config = configparser.ConfigParser()
+            config.optionxform = str
+            config["PARAMETERS"] = parameters
+            fname = f"{path}/config_{parameters['mode']}.ini"
+            with open(fname, "w") as configfile:
+                config.write(configfile)
+            return fname
+        else:
+            raise TypeError("'parameters' required when in write mode.")
     elif mode == "r":
         dict_of_dtypes = {
             "name_format": "int",
@@ -44,17 +71,19 @@ def config(parameters, mode):
             "num_workers": "int",
             "verbose": "int"
         }
-        for key, value in dict_of_dtypes.items():
-            if key in parameters.keys():
-                if value == "float":
-                    parameters[key] = float(parameters[key])
-                elif value == "int":
-                    parameters[key] = int(parameters[key])
-
+        config = configparser.ConfigParser()
+        config.optionxform = str
+        config.read(path)
+        parameters = dict()
+        for key, value in config["PARAMETERS"].items():
+            if key in dict_of_dtypes.keys():
+                if dict_of_dtypes[key] == "float":
+                    parameters[key] = float(config["PARAMETERS"][key])
+                elif dict_of_dtypes[key] == "int":
+                    parameters[key] = int(config["PARAMETERS"][key])
+            else:
+                parameters[key] = value
         return parameters
-
-
-
 
 
 def init_h5datasets(params):
