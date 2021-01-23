@@ -101,7 +101,7 @@ def process():
         elif params.mode == "detect":
             print(f"{count} detections; catalogue saved to {params.writepath}")
     elif params.mode == "cat2h5":
-        io.init_h5datasets(params)
+        init_h5datasets(params)
         if params.num_workers == 1:
             for a in tqdm(A, **pbargs):
                 count += workflows.build_h5(**a)
