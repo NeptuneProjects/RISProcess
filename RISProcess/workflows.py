@@ -121,7 +121,7 @@ def process_data(params):
         count = 0
         if params.verbose:
             print("Running detector.")
-        path = params.catalogue
+        path = params.writepath
         if not os.path.exists(path):
             os.makedirs(path)
         for tr in st:

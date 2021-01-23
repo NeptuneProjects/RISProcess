@@ -1,3 +1,5 @@
 .git
 .ipynb_checkpoints
 __pycache__
+.ini
+.DS_Store
