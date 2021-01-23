@@ -6,8 +6,8 @@ def setup_package():
         url="https://github.com/NeptuneProjects/RISProcess.git",
         author="William F. Jenkins II",
         author_email="wjenkins@ucsd.edu",
-        packages=["RISCluster"],
-        package_dir = {"": "RISCluster"},
+        packages=["RISProcess"],
+        package_dir = {"": "RISProcess"},
         install_requires=[
             "h5py",
             "jupyterlab",
