@@ -4,6 +4,10 @@ data that were collected on the Ross Ice Shelf (RIS), Antarctica, from 2014-
 2017.  The package is built using [Obspy](https://docs.obspy.org), h5py, and a
 number of other libraries.
 
+This package is used to build the data sets required for the deep embedded
+clustering project, [RISCluster](https://github.com/NeptuneProjects/RISCluster).  
+Details on the clustering project are available in [Jenkins et al.](https://www.essoar.org/doi/abs/10.1002/essoar.10505894.1)
+
 Information on the data set can be found at [FDSN](https://www.fdsn.org/networks/detail/XH_2014/). The project is documented in [Bromirski et al.](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015GL065284)
 
 ## Installation
