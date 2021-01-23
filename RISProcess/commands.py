@@ -14,7 +14,7 @@ from datetime import datetime
 import pandas as pd
 from tqdm import tqdm
 
-from RISProcess.io import config
+from RISProcess.io import config, init_h5datasets
 from RISProcess import workflows
 from RISProcess.processing import clean_catalogue, SignalProcessing
 
