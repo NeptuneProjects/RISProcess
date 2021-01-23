@@ -46,7 +46,7 @@ def config(mode, path=".", parameters=None):
             fname = f"{path}/config_{parameters['mode']}.ini"
             with open(fname, "w") as configfile:
                 config.write(configfile)
-            return os.path.abspath(fname)
+            return fname
         else:
             raise TypeError("'parameters' required when in write mode.")
     elif mode == "r":
