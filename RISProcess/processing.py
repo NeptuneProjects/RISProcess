@@ -23,8 +23,8 @@ class SignalProcessing():
             mode,
             sourcepath=".",
             name_format=1,
-            writepath=None,
-            catalogue=None,
+            writepath='./ProcessedData',
+            catalogue='.',
             network="*",
             station="*",
             location="*",
@@ -51,10 +51,7 @@ class SignalProcessing():
         ):
         self.mode = mode
         self.sourcepath = sourcepath
-        if writepath is not None:
-            self.writepath = writepath
-        else:
-            self.writepath = f"./ProcessedData"
+        self.writepath = writepath
         self.catalogue = catalogue
         self.name_format = name_format
         self.network = network
