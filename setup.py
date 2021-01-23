@@ -11,7 +11,7 @@ def setup_package():
         packages=["RISProcess"],
         # scripts=["scripts/testscript.py", "scripts/testscript2.py"],
         entry_points = {
-            'console_scripts': ['testscript=scripts.testscript:main']
+            'console_scripts': ['test1=RISProcess.commands:test1']
         },
         install_requires=[
             "h5py",
