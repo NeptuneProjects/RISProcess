@@ -2,6 +2,7 @@ from setuptools import setup
 
 setup(
     name="RIS Seismic Signal Processing",
+    url="https://github.com/NeptuneProjects/RISProcess.git",
     author="William F. Jenkins II",
     author_email="wjenkins@ucsd.edu",
     packages=["RISCluster"],
