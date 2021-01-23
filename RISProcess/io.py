@@ -15,13 +15,46 @@ import numpy as np
 import pandas as pd
 
 
-def config_processing(parameters):
-    config = configparser.ConfigParser()
-    config["PARAMETERS"] = parameters
-    fname = f"{parameters['path']}/config_{parameters['mode']}.ini"
-    with open(fname, "w") as configfile:
-        config.write(configfile)
-    return fname
+def config(parameters, mode):
+    if mode == "w":
+        config = configparser.ConfigParser()
+        config["PARAMETERS"] = parameters
+        fname = f"{parameters['path']}/config_{parameters['mode']}.ini"
+        with open(fname, "w") as configfile:
+            config.write(configfile)
+        return fname
+    elif mode == "r":
+        dict_of_dtypes = {
+            "name_format": "int",
+            "taper": "float",
+            "prefeed": "float",
+            "fs2": "float",
+            "cutoff": "float",
+            "T_seg": "float",
+            "NFFT": "int",
+            "tpersnap": "float",
+            "overlap": "float",
+            "prefilt": "float",
+            "waterlevel": "float",
+            "STA": "float",
+            "LTA": "float",
+            "on": "float",
+            "off": "float",
+            "det_window": "float",
+            "num_workers": "int",
+            "verbose": "int"
+        }
+        for key, value in dict_of_dtypes.items():
+            if key in parameters.keys():
+                if value == "float":
+                    parameters[key] = float(parameters[key])
+                elif value == "int":
+                    parameters[key] = int(parameters[key])
+
+        return parameters
+
+
+
 
 
 def init_h5datasets(params):

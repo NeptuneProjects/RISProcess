@@ -22,15 +22,13 @@ import argparse
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from copy import deepcopy
 from datetime import datetime
-import importlib as imp
 
-import h5py
-import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-from RISProcess import processing
+from RISProcess import io
 from RISProcess import workflows
+from RISProcess.processing import SignalProcessing
 
 
 debug = False
@@ -46,7 +44,7 @@ if __name__ == "__main__":
         network = "XH"
         station = "RS17"
         channel = "HHZ"
-        params = processing.SignalProcessing(
+        params = SignalProcessing(
             start,
             stop,
             mode="cat2h5",
@@ -131,7 +129,7 @@ if __name__ == "__main__":
         parser.add_argument("--num_workers", type=int, default=1)
         parser.add_argument("--verbose", type=int, default=0)
         args = parser.parse_args()
-        params = processing.SignalProcessing(**vars(args))
+        params = SignalProcessing(**vars(args))
     print("=" * 79)
     print(f"Processing data.  Workers: {params.num_workers}")
     start_search = params.start.floor('D')

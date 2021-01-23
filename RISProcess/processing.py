@@ -159,6 +159,7 @@ def centered_spectrogram(tr, params):
     return t, f, S, S_out, dtvec[tmask_c][0], dtvec[tmask_c][-1]
 
 
+# TODO: Implement as command line tool
 def clean_catalogue(
         source,
         dest=f"{pd.Timestamp.now().strftime('%y%m%d%H%M%S')}.csv",
