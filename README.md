@@ -23,3 +23,9 @@ The following steps will set up a Conda environment and install RISProcess.
 3. In terminal, run: `conda env create -f RISProcess.yml`
 4. Once the environment is set up and the package is installed, activate your
 environment by running `conda activate RISProcess` in terminal.
+
+## Author
+William Jenkins
+Scripps Institution of Oceanography
+UC San Diego
+La Jolla, California
