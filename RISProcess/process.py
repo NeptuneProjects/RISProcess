@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """This script provides to read raw MSEED seismic data into processed MSEED
 data.  Functions available allow for filtering, decimation, and instrument
 response removal.  Single- and multi-core processing are available.  If the
