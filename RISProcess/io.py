@@ -80,9 +80,9 @@ def config(mode, path=".", parameters=None):
                     parameters[key] = float(config["PARAMETERS"][key])
                 elif dict_of_dtypes[key] == 'int':
                     parameters[key] = int(config["PARAMETERS"][key])
-                elif dict_of_keys[key] == 'arrayfloat':
+                elif dict_of_dtypes[key] == 'arrayfloat':
                     parameters[key] = [float(i) for i in config['PARAMETERS'][key].split(', ')]
-                elif dict_of_keys[key] == 'arrayfloat':
+                elif dict_of_dtypes[key] == 'arrayfloat':
                     parameters[key] = [int(i) for i in config['PARAMETERS'][key].split(', ')]
             else:
                 parameters[key] = value
