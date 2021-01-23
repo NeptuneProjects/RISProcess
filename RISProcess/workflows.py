@@ -28,12 +28,9 @@ def build_h5(params):
     mask = (catalogue['dt_on'] >= mask_start) & (catalogue['dt_on'] < mask_stop)
     catalogue = catalogue.loc[mask]
 
-    # C_out = np.zeros((M, 69, int(params.T_seg//(params.tpersnap*(1 - params.overlap)))))
-
     if catalogue["dt_on"].empty:
         return 0
     else:
-        # try:
         if params.station == "*":
             station_list = catalogue["station"].unique()
         else:

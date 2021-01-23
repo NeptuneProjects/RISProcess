@@ -10,7 +10,33 @@ from tqdm import tqdm
 
 from RISProcess.io import config
 from RISProcess import workflows
-from RISProcess.processing import SignalProcessing
+from RISProcess.processing import clean_catalogue, SignalProcessing
+
+
+def cleancat():
+    """This command-line function reads a seismic catalogue and removes
+    duplicate detections, and optionally, detections that occur within a window
+    after an initial event.
+
+    Parameters
+    ----------
+    source : str
+        Path to catalogue (.csv)
+    dest : str
+        Path to destination file (.csv)
+    window : float
+        Window (s) from previous detection in which subsequent detections will
+        be removed.
+    """
+    parser = argparse.ArgumentParser(
+        description="Removes duplicate entries, and entries occurring within "\
+        "a window after an initial detection."
+    )
+    parser.add_argument("source", help="Path to catalogue to be processed.")
+    parser.add_argument("--dest", help="Path to save new catalogue.")
+    parser.add_argument("--window", type=float, help="Removal window (s)")
+    args = parser_args()
+    clean_catalogue(**vars(args))
 
 
 def process():
