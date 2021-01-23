@@ -29,10 +29,8 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-import core
-import workflows
-imp.reload(core)
-imp.reload(workflows)
+from RISProcess import processing
+from RISProcess import workflows
 
 
 debug = False
@@ -48,7 +46,7 @@ if __name__ == "__main__":
         network = "XH"
         station = "RS17"
         channel = "HHZ"
-        params = core.SignalProcessing(
+        params = processing.SignalProcessing(
             start,
             stop,
             mode="cat2h5",
@@ -133,7 +131,7 @@ if __name__ == "__main__":
         parser.add_argument("--num_workers", type=int, default=1)
         parser.add_argument("--verbose", type=int, default=0)
         args = parser.parse_args()
-        params = core.SignalProcessing(**vars(args))
+        params = processing.SignalProcessing(**vars(args))
     print("=" * 79)
     print(f"Processing data.  Workers: {params.num_workers}")
     start_search = params.start.floor('D')
@@ -167,7 +165,7 @@ if __name__ == "__main__":
         elif params.mode == "detect":
             print(f"{count} detections; catalogue saved to {params.writepath}")
     elif params.mode == "cat2h5":
-        core.init_h5datasets(params)
+        io.init_h5datasets(params)
         if params.num_workers == 1:
             for a in tqdm(A, **pbargs):
                 count += workflows.build_h5(**a)

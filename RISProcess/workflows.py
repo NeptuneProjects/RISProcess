@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 '''Seismic signal processing workflows.
 
 William Jenkins, wjenkins [at] ucsd [dot] edu
@@ -14,7 +16,8 @@ import obspy
 from obspy.signal.trigger import classic_sta_lta, trigger_onset, z_detect
 import pandas as pd
 
-import core
+from RISProcess.io import write_h5datasets
+from RISProcess import processing
 
 
 def build_h5(params):
@@ -55,8 +58,8 @@ def build_h5(params):
                         params_copy = deepcopy(params)
                         params_copy.update_times(start, stop)
                         params_copy.station = row.station
-                        tr = core.pipeline(params_copy)[0]
-                        _, _, _, S_arr[i], dt0, dt1 = core.centered_spectrogram(tr, params_copy)
+                        tr = processing.pipeline(params_copy)[0]
+                        _, _, _, S_arr[i], dt0, dt1 = processing.centered_spectrogram(tr, params_copy)
                         tr_arr[i, :] = tr.trim(
                             starttime=obspy.core.UTCDateTime(dt0),
                             endtime=obspy.core.UTCDateTime(dt1)
@@ -72,7 +75,7 @@ def build_h5(params):
                 tr_arr = tr_arr[not_zeros]
                 S_arr = S_arr[not_zeros]
                 try:
-                    count += core.write_h5datasets(tr_arr, S_arr, metadata, params)
+                    count += write_h5datasets(tr_arr, S_arr, metadata, params)
                 except OSError:
                     raise OSError("Unable to write data; check write path.")
             except OSError:
@@ -97,7 +100,7 @@ def process_data(params):
         Number of files saved to disk.
     '''
     # warnings.simplefilter("ignore", category=InternalMSEEDReadingWarning)
-    st = core.pipeline(params)
+    st = processing.pipeline(params)
 
     if params.mode == "preprocess":
         if params.verbose:
