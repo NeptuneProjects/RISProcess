@@ -4,8 +4,7 @@ data that were collected on the Ross Ice Shelf (RIS), Antarctica, from 2014-
 2017.  The package is built using [Obspy](https://docs.obspy.org), h5py, and a
 number of other libraries.
 
-Information on the data set can be found at [FDSN](https://www.fdsn.org/networks/detail/XH_2014/).  
-The project is documented in [Bromirski et al.](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015GL065284).
+Information on the data set can be found at [FDSN](https://www.fdsn.org/networks/detail/XH_2014/). The project is documented in [Bromirski et al.](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015GL065284)
 
 ## Installation
 ### Mac & Linux
