@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-'''Database I/O functions.
+'''Database & workflow I/O functions.
 
 William Jenkins, wjenkins [at] ucsd [dot] edu
 Scripps Institution of Oceanography, UC San Diego
-December 2020
+January 2021
 '''
 import configparser
 import json
