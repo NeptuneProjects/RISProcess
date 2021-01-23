@@ -121,10 +121,13 @@ def process_data(params):
         count = 0
         if params.verbose:
             print("Running detector.")
+        path = params.catalogue
+        if not os.path.exists(path):
+            os.makedirs(path)
         for tr in st:
             catalogue = pd.DataFrame(columns=["network", "station", "channel", "dt_on", "dt_off", "dt_peak", "peak", "unit", "fs", "delta", "npts", "STA", "LTA", "on", "off"])
-            if not os.path.exists(f"{params.catalogue}/catalogue.csv"):
-                catalogue.to_csv(f"{params.catalogue}/catalogue.csv", mode="a", index=False)
+            if not os.path.exists(f"{path}/catalogue.csv"):
+                catalogue.to_csv(f"{path}/catalogue.csv", mode="a", index=False)
             secs = np.arange(0, tr.stats.npts * tr.stats.delta, tr.stats.delta)
             time = params.start_processing + pd.to_timedelta(secs, unit="sec")
             if params.verbose:
@@ -157,7 +160,7 @@ def process_data(params):
             catalogue["LTA"] = [params.LTA for i in range(nrows)]
             catalogue["on"] = [params.on for i in range(nrows)]
             catalogue["off"] = [params.off for i in range(nrows)]
-            catalogue.to_csv(f"{params.catalogue}/catalogue.csv", mode="a", index=False, header=False)
+            catalogue.to_csv(f"{path}/catalogue.csv", mode="a", index=False, header=False)
             if params.verbose:
                 print("Catalogue built.")
             del catalogue
