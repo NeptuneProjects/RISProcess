@@ -31,6 +31,6 @@ environment by running `conda activate RISProcess` in terminal.
 
 ## Author
 William Jenkins
-Scripps Institution of Oceanography
-UC San Diego
-La Jolla, California
+<br>Scripps Institution of Oceanography
+<br>UC San Diego
+<br>La Jolla, California
