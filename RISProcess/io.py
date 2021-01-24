@@ -8,10 +8,14 @@ January 2021
 """
 import configparser
 import json
+import logging
 import os
 
 import h5py
 import numpy as np
+from obspy import UTCDateTime
+from obspy.clients.fdsn.mass_downloader import MassDownloader, \
+    RectangularDomain, Restrictions
 import pandas as pd
 
 
@@ -191,3 +195,77 @@ def write_h5datasets(tr, S, metadata, params):
         for i in np.arange(0,M):
             dset_cat[-M+i,] = json.dumps(metadata[i])
     return M
+
+
+def FDSN_downloader(
+        datapath,
+        start='20141201',
+        stop='20161201',
+        network='XH',
+        station='*',
+        channel='HH*'
+    ):
+    """This function uses the FDSN mass data downloader to automatically
+    download data from the XH network deployed on the RIS from Dec 2014 - Dec
+    2016. More information on the Obspy mass downloader available at:
+    https://docs.obspy.org/packages/autogen/obspy.clients.fdsn.mass_downloader.html
+
+    Parameters
+    ----------
+    datapath : str
+        Path to save MSEED and XML data.
+
+    start : str
+        Start date, in format YYYYMMDD
+
+    stop : str
+        Stop date, in format YYYYMMDD
+
+    network : str
+        2-character FDSN network code
+        
+    station: str
+        2-character station code
+
+    channel: str
+        3-character channel code
+    """
+    print("=" * 65)
+    print("Initiating mass download request.")
+    start = UTCDateTime(start)
+    stop  = UTCDateTime(stop)
+
+    if not os.path.exists(datapath):
+        os.makedirs(f'{datapath}/MSEED')
+        os.makedirs(f'{datapath}/StationXML')
+
+    domain = RectangularDomain(
+        minlatitude=-85,
+        maxlatitude=-75,
+        minlongitude=160,
+        maxlongitude=-130
+    )
+
+    restrictions = Restrictions(
+        starttime = start,
+        endtime = stop,
+        chunklength_in_sec = 86400,
+        network = network,
+        station = station,
+        location = "*",
+        channel = channel,
+        reject_channels_with_gaps = True,
+        minimum_length = 0.0,
+        minimum_interstation_distance_in_m = 100.0
+    )
+
+    mdl = MassDownloader(providers=["IRIS"])
+    mdl.download(
+        domain,
+        restrictions,
+        mseed_storage=f"{datapath}/MSEED",
+        stationxml_storage=f"{datapath}/StationXML"
+    )
+
+    logger = logging.getLogger("obspy.clients.fdsn.mass_downloader")
+    logger.setLevel(logging.DEBUG)

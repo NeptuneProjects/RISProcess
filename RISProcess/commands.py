@@ -14,7 +14,7 @@ from datetime import datetime
 import pandas as pd
 from tqdm import tqdm
 
-from RISProcess.io import config, init_h5datasets
+from RISProcess.io import config, init_h5datasets, FDSN_downloader
 from RISProcess import workflows
 from RISProcess.processing import clean_catalogue, SignalProcessing
 
@@ -47,6 +47,24 @@ def cleancat():
     parser.add_argument("--window", type=float, help="Removal window (s)")
     args = parser.parse_args()
     clean_catalogue(**vars(args))
+
+
+def downloadfdsn():
+    """This command line function uses Obspy's mass download tools to
+    retrieve seismic data from the FDSN servers.
+
+    Parameters
+    ----------
+    path : command line input
+        This command-line function requires as input the path to the saved
+        configuration file.
+    """
+    parser = argparse.ArgumentParser(
+        description="Command-line tool for downloading seismic data from FDSN."
+    )
+    parser.add_argument("path", help="Path to config file")
+    args = parser.parse_args()
+    FDSN_downloader(**config("r", path=args.path))
 
 
 def process():
