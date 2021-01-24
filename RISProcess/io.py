@@ -203,7 +203,8 @@ def FDSN_downloader(
         stop='20161201',
         network='XH',
         station='*',
-        channel='HH*'
+        channel='HH*',
+        **kwargs
     ):
     """This function uses the FDSN mass data downloader to automatically
     download data from the XH network deployed on the RIS from Dec 2014 - Dec
@@ -223,7 +224,7 @@ def FDSN_downloader(
 
     network : str
         2-character FDSN network code
-        
+
     station: str
         2-character station code
 
