@@ -49,7 +49,7 @@ def cleancat():
     clean_catalogue(**vars(args))
 
 
-def downloadfdsn():
+def dlfdsn():
     """This command line function uses Obspy's mass download tools to
     retrieve seismic data from the FDSN servers.
 
