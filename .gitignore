@@ -3,5 +3,5 @@
 __pycache__
 .ini
 .DS_Store
-/outputs
+/outputs/*
 !/outputs/*.ini
