@@ -98,11 +98,12 @@ def process_data(params):
     """
     # warnings.simplefilter("ignore", category=InternalMSEEDReadingWarning)
     st = processing.pipeline(params)
+    if st == 0:
+        return 0
 
     if params.mode == "preprocess":
         if params.verbose:
             print("Trimming.")
-        print(st)
         st.trim(
             starttime=obspy.core.UTCDateTime(params.start),
             endtime=obspy.core.UTCDateTime(params.stop)
