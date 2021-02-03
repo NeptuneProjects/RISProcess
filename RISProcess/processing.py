@@ -142,7 +142,7 @@ class SignalProcessing():
 
         params = {str(key): str(value) for key, value in self.__dict__.items()}
         with open(f'params_{self.mode}.json', 'w') as f:
-            json.dump(saved, f)
+            json.dump(params, f)
 
 
 def centered_spectrogram(tr, params):
