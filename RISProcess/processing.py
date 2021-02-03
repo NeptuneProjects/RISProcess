@@ -129,7 +129,7 @@ class SignalProcessing():
         self.stop_processing = self.stop + pd.Timedelta(seconds=self.buffer_back)
 
 
-    def save_json(self, path=self.writepath):
+    def save_json(self, path=writepath):
         """Saves class keys and values to JSON file.
 
         Parameters
