@@ -7,6 +7,7 @@ Scripps Institution of Oceanography, UC San Diego
 January 2021
 """
 from datetime import datetime
+import json
 
 import numpy as np
 from obspy import read, read_inventory
@@ -126,6 +127,19 @@ class SignalProcessing():
 
         self.start_processing = self.start - pd.Timedelta(seconds=self.buffer_front)
         self.stop_processing = self.stop + pd.Timedelta(seconds=self.buffer_back)
+
+
+    def save_json(self, path=self.writepath):
+        """Saves class keys and values to JSON file.
+
+        Parameters
+        ----------
+        path : str
+            Path to save JSON file.
+        """
+        params = {str(key): str(value) for key, value in self.__dict__.items()}
+        with open(f'params_{self.mode}.json', 'w') as f:
+            json.dump(saved, f)
 
 
 def centered_spectrogram(tr, params):
