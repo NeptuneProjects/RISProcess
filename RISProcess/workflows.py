@@ -98,8 +98,8 @@ def process_data(params):
     """
     # warnings.simplefilter("ignore", category=InternalMSEEDReadingWarning)
     st = processing.pipeline(params)
-    # if st == 0:
-    #     return 0
+    if st == 0:
+        return 0
 
     if params.mode == "preprocess":
         if params.verbose:
