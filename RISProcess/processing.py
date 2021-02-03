@@ -143,7 +143,7 @@ class SignalProcessing():
             path = self.parampath
 
         params = {str(key): str(value) for key, value in self.__dict__.items()}
-        with open(f'params_{self.mode}.json', 'w') as f:
+        with open(f'{path}/params_{self.mode}.json', 'w') as f:
             json.dump(params, f)
 
 
