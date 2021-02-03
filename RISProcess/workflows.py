@@ -117,7 +117,6 @@ def process_data(params):
             tr.data = tr.data.astype("float32")
             tr.write(f"{path}/{fname}", format="MSEED", encoding=4)
             count += 1
-        params.save_json()
         return count
 
     elif params.mode == "detect":
@@ -168,5 +167,4 @@ def process_data(params):
                 print("Catalogue built.")
             del catalogue
             count += on_off.shape[0]
-        params.save_json()
         return count

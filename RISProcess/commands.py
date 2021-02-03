@@ -86,6 +86,7 @@ def process():
     parser.add_argument("path", help="Path to config file")
     args = parser.parse_args()
     params = SignalProcessing(**config("r", path=args.path))
+    params.save_json()
     print("=" * 79)
     print(f"Processing data.  Workers: {params.num_workers}")
     start_search = params.start.floor('D')
