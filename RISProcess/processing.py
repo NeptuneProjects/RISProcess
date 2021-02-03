@@ -57,6 +57,7 @@ class SignalProcessing():
         self.sourcepath = sourcepath
         self.writepath = writepath
         self.catalogue = catalogue
+        self.parampath = parampath
         self.name_format = name_format
         self.network = network
         self.station = station
@@ -139,7 +140,7 @@ class SignalProcessing():
             Path to save JSON file.
         """
         if path is None:
-            path = self.writepath
+            path = self.parampath
 
         params = {str(key): str(value) for key, value in self.__dict__.items()}
         with open(f'params_{self.mode}.json', 'w') as f:
