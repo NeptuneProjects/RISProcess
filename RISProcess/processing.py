@@ -273,7 +273,6 @@ def decimate_to_fs2(st, fs2):
 
 
 def pipeline(params):
-    print(params.sourcepath)
     if params.verbose:
         print("Reading stream.")
     st = read_stream(params)
