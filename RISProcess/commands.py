@@ -86,7 +86,6 @@ def process():
     parser.add_argument("path", help="Path to config file")
     args = parser.parse_args()
     params = SignalProcessing(**config("r", path=args.path))
-    params.save_json()
     print("=" * 79)
     print(f"Processing data.  Workers: {params.num_workers}")
     start_search = params.start.floor('D')
@@ -151,6 +150,7 @@ def process():
                         )
                         break
         print(f"\n{count} samples saved.")
+    params.save_json()
     time_elapsed = str(datetime.now() - tic)[:-7]
     print(f"{time_elapsed} elapsed.")
     print("=" * 79)
