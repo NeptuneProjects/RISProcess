@@ -129,7 +129,7 @@ class SignalProcessing():
         self.stop_processing = self.stop + pd.Timedelta(seconds=self.buffer_back)
 
 
-    def save_json(self, path=writepath):
+    def save_json(self, path=None):
         """Saves class keys and values to JSON file.
 
         Parameters
@@ -137,6 +137,9 @@ class SignalProcessing():
         path : str
             Path to save JSON file.
         """
+        if path is None:
+            path = self.writepath
+
         params = {str(key): str(value) for key, value in self.__dict__.items()}
         with open(f'params_{self.mode}.json', 'w') as f:
             json.dump(saved, f)
