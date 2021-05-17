@@ -309,10 +309,6 @@ def pipeline(params):
         if params.verbose:
             print("Tapering.")
         st.taper(max_percentage=0.5, type='hann', max_length=params.taper)
-    if params.fs2 is not None:
-        if params.verbose:
-            print("Decimating.")
-        st = decimate_to_fs2(st, params.fs2)
     if (params.waterlevel and params.output and params.prefilt) is not None:
         if params.verbose:
             print("Reading station XML.")
@@ -320,6 +316,10 @@ def pipeline(params):
         if params.verbose:
             print("Removing response.")
         st.remove_response(inventory=inv, water_level=params.waterlevel, output=params.output, pre_filt=params.prefilt, plot=False)
+    if params.fs2 is not None:
+        if params.verbose:
+            print("Decimating.")
+        st = decimate_to_fs2(st, params.fs2)
     if params.cutoff is not None:
         if params.verbose:
             print("Filtering.")
