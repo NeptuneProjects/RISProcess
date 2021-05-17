@@ -30,7 +30,7 @@ The following steps will set up a Conda environment and install RISProcess.
 environment by running `conda activate RISProcess` in terminal.
 
 ## Usage
-The Jupyter notebook, **RISCluster.ipynb**, provides an outline of general usage and workflow.
+The Jupyter notebook, **[RISProcess.ipynb](https://github.com/NeptuneProjects/RISProcess/blob/master/RISProcess.ipynb)**, provides an outline of general usage and workflow.
 There are two components to the worfklow: setting up configuration files, and executing scripts.
 The configuration files can be set up manually (not recommended), or using the provided notebook.
 Scripts are executed from the terminal, with recommended commands printed within the notebook.
