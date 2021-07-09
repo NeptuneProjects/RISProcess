@@ -119,7 +119,7 @@ def process_data(params):
             count += 1
         return count
 
-    elif params.mode == "detect":
+    else:
         count = 0
         if params.verbose:
             print("Running detector.")
