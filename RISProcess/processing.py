@@ -307,7 +307,7 @@ def pipeline(params):
     # Detrend data
     if params.verbose:
         print("Detrending.")
-    st.detrend(type="polynomial", order=3, plot=True)
+    st.detrend(type="polynomial", order=3)
     # Taper data
     if params.taper is not None:
         if params.verbose:
