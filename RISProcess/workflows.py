@@ -127,6 +127,7 @@ def process_data(params):
         if not os.path.exists(path):
             os.makedirs(path)
         for tr in st:
+            fs = tr.stats.sampling_rate
             catalogue = pd.DataFrame(columns=["network", "station", "channel", "dt_on", "dt_off", "dt_peak", "peak", "unit", "fs", "delta", "npts", "STA", "LTA", "on", "off"])
             if not os.path.exists(f"{path}/catalogue.csv"):
                 catalogue.to_csv(f"{path}/catalogue.csv", mode="a", index=False)
@@ -135,11 +136,11 @@ def process_data(params):
             if params.verbose:
                 print("Calculating CFT.")
             if params.detector == "classic":
-                cft = trigger.classic_sta_lta(tr.data, params.STA, params.LTA)
+                cft = trigger.classic_sta_lta(tr.data, int(fs * params.STA), int(fs * params.LTA))
             elif params.detector == "recursive":
-                cft = trigger.recursive_sta_lta(tr.data, params.STA, params.LTA)
+                cft = trigger.recursive_sta_lta(tr.data, int(fs * params.STA), int(fs * params.LTA))
             elif params.detector == "z":
-                cft = trigger.z_detect(tr.data, int(tr.stats.sampling_rate * 3))
+                cft = trigger.z_detect(tr.data, int(fs * 3))
             if params.verbose:
                 print("Locating triggers.")
             on_off = trigger.trigger_onset(cft, params.on, params.off)
@@ -157,7 +158,7 @@ def process_data(params):
             catalogue["dt_peak"] = time[i_max]
             catalogue["peak"] = tr.data[i_max]
             catalogue["unit"] = [params.output for i in range(nrows)]
-            catalogue["fs"] = [tr.stats.sampling_rate for i in range(nrows)]
+            catalogue["fs"] = [fs for i in range(nrows)]
             catalogue["delta"] = [tr.stats.delta for i in range(nrows)]
             catalogue["npts"] = [tr.stats.npts for i in range(nrows)]
             catalogue["STA"] = [params.STA for i in range(nrows)]
