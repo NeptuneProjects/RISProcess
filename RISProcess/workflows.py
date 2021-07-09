@@ -13,7 +13,7 @@ import os
 import numpy as np
 import obspy
 # from obspy.io.mseed import InternalMSEEDReadingWarning
-from obspy.signal.trigger import classic_sta_lta, trigger_onset, z_detect
+from obspy.signal import trigger
 import pandas as pd
 
 from RISProcess.io import write_h5datasets
@@ -135,12 +135,14 @@ def process_data(params):
             if params.verbose:
                 print("Calculating CFT.")
             if params.detector == "classic":
-                cft = classic_sta_lta(tr.data, params.STA, params.LTA)
+                cft = trigger.classic_sta_lta(tr.data, params.STA, params.LTA)
+            elif params.detector = "recursive":
+                cft = trigger.recursive_sta_lta(tr.data, params.STA, params.LTA)
             elif params.detector == "z":
-                cft = z_detect(tr.data, int(tr.stats.sampling_rate * 3))
+                cft = trigger.z_detect(tr.data, int(tr.stats.sampling_rate * 3))
             if params.verbose:
                 print("Locating triggers.")
-            on_off = trigger_onset(cft, params.on, params.off)
+            on_off = trigger.trigger_onset(cft, params.on, params.off)
             if isinstance(on_off, list):
                 del catalogue
                 continue
