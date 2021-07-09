@@ -292,6 +292,7 @@ def decimate_to_fs2(st, fs2):
 
 
 def pipeline(params):
+    # Reads data from file
     if params.verbose:
         print("Reading stream.")
     st = read_stream(params)
@@ -299,16 +300,20 @@ def pipeline(params):
         if params.verbose:
             print("No files found.")
         return 0
+    # Remove any traces with gaps
     if params.verbose:
         print("Removing gap traces.")
     st = remove_gap_traces(st)
+    # Detrend data
     if params.verbose:
         print("Detrending.")
-    st.detrend(type="Linear")
+    st.detrend(type="polynomial", order=3, plot=True)
+    # Taper data
     if params.taper is not None:
         if params.verbose:
             print("Tapering.")
         st.taper(max_percentage=0.5, type='hann', max_length=params.taper)
+    # Remove instrument response
     if (params.waterlevel and params.output and params.prefilt) is not None:
         if params.verbose:
             print("Reading station XML.")
@@ -316,10 +321,12 @@ def pipeline(params):
         if params.verbose:
             print("Removing response.")
         st.remove_response(inventory=inv, water_level=params.waterlevel, output=params.output, pre_filt=params.prefilt, plot=False)
+    # Decimate data
     if params.fs2 is not None:
         if params.verbose:
             print("Decimating.")
         st = decimate_to_fs2(st, params.fs2)
+    # Filter data
     if params.cutoff is not None:
         if params.verbose:
             print("Filtering.")
