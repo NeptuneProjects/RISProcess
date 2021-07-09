@@ -136,7 +136,7 @@ def process_data(params):
                 print("Calculating CFT.")
             if params.detector == "classic":
                 cft = trigger.classic_sta_lta(tr.data, params.STA, params.LTA)
-            elif params.detector = "recursive":
+            elif params.detector == "recursive":
                 cft = trigger.recursive_sta_lta(tr.data, params.STA, params.LTA)
             elif params.detector == "z":
                 cft = trigger.z_detect(tr.data, int(tr.stats.sampling_rate * 3))
