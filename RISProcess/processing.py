@@ -8,10 +8,12 @@ January 2021
 """
 from datetime import datetime
 import json
+import warnings
 
 import numpy as np
 from obspy import read, read_inventory
 from obspy.core import UTCDateTime
+from obspy.io.mseed.headers import InternalMSEEDWarning
 import pandas as pd
 from scipy import signal
 
@@ -375,6 +377,11 @@ def read_stream(params):
     -1 : int
         Returned if no files were read.
     """
+    # Ignore file integrity issues; thus far the only station affected is DR11,
+    # with no seeming impact on the seismic trace itself. Consider treating as
+    # an error in future implementation.
+    warnings.simplefilter("error", category=InternalMSEEDWarning)
+
     start_search = params.start_processing.floor('D')
     stop_search = params.stop_processing.floor('D')
     dts = pd.date_range(start_search, stop_search)
