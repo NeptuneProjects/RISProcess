@@ -302,13 +302,13 @@ def pipeline(params):
         if params.verbose:
             print("No files found.")
         return 0
-    # If only reading stream, function returns stream here.
-    if params.mode == "detect":
-        return st
     # Remove any traces with gaps
     if params.verbose:
         print("Removing gap traces.")
     st = remove_gap_traces(st)
+    # If only reading stream, function returns stream here.
+    if params.mode == "detect":
+        return st
     # Detrend data
     if params.verbose:
         print("Detrending.")
