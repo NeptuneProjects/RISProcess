@@ -125,6 +125,7 @@ def process_data(params):
         if not os.path.exists(path):
             os.makedirs(path)
         for tr in st:
+            print(tr)
             fs = tr.stats.sampling_rate
             catalogue = pd.DataFrame(columns=["network", "station", "channel", "dt_on", "dt_off", "dt_peak", "peak", "unit", "fs", "delta", "npts", "STA", "LTA", "on", "off"])
             if not os.path.exists(f"{path}/catalogue.csv"):
@@ -134,13 +135,12 @@ def process_data(params):
             if params.verbose:
                 print("Calculating CFT.")
             if params.detector == "classic":
-                print("Classic STA/LTA detection in progress...")
-                print(f"STA = {params.STA} s | LTA = {params.LTA} s | On = {params.on} | Off = {params.off}")
                 cft = trigger.classic_sta_lta(tr.data, int(fs * params.STA), int(fs * params.LTA))
             elif params.detector == "recursive":
-                print("Recursive STA/LTA detection in progress...")
-                print(f"STA = {params.STA} s | LTA = {params.LTA} s | On = {params.on} | Off = {params.off}")
-                print(int(fs * params.STA), int(fs * params.LTA))
+                if count == 0:
+                    print("Recursive STA/LTA detection in progress...")
+                    print(f"STA = {params.STA} s | LTA = {params.LTA} s | On = {params.on} | Off = {params.off}")
+                    print(int(fs * params.STA), int(fs * params.LTA))
                 cft = trigger.recursive_sta_lta(tr.data, int(fs * params.STA), int(fs * params.LTA))
             elif params.detector == "z":
                 print("Z-detector detection in progress...")
