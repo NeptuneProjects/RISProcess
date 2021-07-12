@@ -68,6 +68,7 @@ def dlfdsn():
 
 
 def process():
+    print(__name__)
     """This command line function, processes, and saves raw MSEED seismic data.
     Functions available allow for filtering, decimation, and instrument
     response removal. Single- and multi-core processing are available.
