@@ -147,6 +147,7 @@ def process_data(params):
                 cft = trigger.z_detect(tr.data, int(fs * 3))
             if params.verbose:
                 print("Locating triggers.")
+            print(cft.max())
             on_off = trigger.trigger_onset(cft, params.on, params.off)
             print('Before')
             print(on_off)
