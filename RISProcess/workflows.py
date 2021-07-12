@@ -108,7 +108,7 @@ def process_data(params):
         )
         count = 0
         for tr in st:
-            path = f"{params.writepath}/{tr.stats.network}/{tr.stats.station}"
+            path = f"{params.writepath}/MSEED/{tr.stats.network}/{tr.stats.station}"
             if not os.path.exists(path):
                 os.makedirs(path)
             fname = f"{tr.stats.network}.{tr.stats.station}.{tr.stats.channel}.{params.start.year}.{params.start.dayofyear:03d}.mseed"
