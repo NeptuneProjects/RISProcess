@@ -388,7 +388,7 @@ def read_stream(params):
     count = 0
     for i, dt in enumerate(dts):
         if params.name_format == 1:
-            filespec = f"/{params.network}/{params.station}/{params.network}.{params.station}.{params.channel}.{dt.year}.{dt.dayofyear:03d}.mseed"
+            filespec = f"{params.network}/{params.station}/{params.network}.{params.station}.{params.channel}.{dt.year}.{dt.dayofyear:03d}.mseed"
         elif params.name_format == 2:
             filespec = f"{params.network}.{params.station}..{params.channel}__{dt.year}{dt.month:02d}{dt.day:02d}T*"
 
