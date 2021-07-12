@@ -142,10 +142,14 @@ def process_data(params):
             if params.verbose:
                 print("Locating triggers.")
             on_off = trigger.trigger_onset(cft, params.on, params.off)
+            print('Before')
+            print(on_off)
             if isinstance(on_off, list):
                 del catalogue
                 continue
             on_off = on_off[(time[on_off[:,0]] >= params.start) & (time[on_off[:,0]] < params.stop), :]
+            print('After')
+            print(on_off)
             nrows = on_off.shape[0]
             catalogue["network"] = [tr.stats.network for i in range(nrows)]
             catalogue["station"] = [tr.stats.station for i in range(nrows)]
