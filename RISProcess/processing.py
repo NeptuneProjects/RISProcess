@@ -395,16 +395,16 @@ def read_stream(params):
         elif params.name_format == 2:
             filespec = f"{params.network}.{params.station}..{params.channel}__{dt.year}{dt.month:02d}{dt.day:02d}T*"
 
-        # try:
-        if count == 0:
-            # st = read(f"{params.sourcepath}/MSEED/{filespec}")
-            st = read(f"{params.sourcepath}/{filespec}")
-        else:
-            # st += read(f"{params.sourcepath}/MSEED/{filespec}")
-            st += read(f"{params.sourcepath}/{filespec}")
-        count += 1
-        # except:
-            # pass
+        try:
+            if count == 0:
+                # st = read(f"{params.sourcepath}/MSEED/{filespec}")
+                st = read(f"{params.sourcepath}/{filespec}")
+            else:
+                # st += read(f"{params.sourcepath}/MSEED/{filespec}")
+                st += read(f"{params.sourcepath}/{filespec}")
+            count += 1
+        except:
+            pass
 
     if count > 0:
         st.merge()
