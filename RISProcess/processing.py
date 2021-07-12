@@ -404,14 +404,15 @@ def read_stream(params):
         #         count += 1
         #     except:
         #         pass
-        try:
-            if count == 0:
-                st = read(f"{params.sourcepath}/MSEED/{filespec}")
-            else:
-                st += read(f"{params.sourcepath}/MSEED/{filespec}")
-            count += 1
-        except:
-            pass
+
+        # try:
+        if count == 0:
+            st = read(f"{params.sourcepath}/MSEED/{filespec}")
+        else:
+            st += read(f"{params.sourcepath}/MSEED/{filespec}")
+        count += 1
+        # except:
+            # pass
 
     if count > 0:
         st.merge()
