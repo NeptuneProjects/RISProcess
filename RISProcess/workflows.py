@@ -134,10 +134,16 @@ def process_data(params):
             if params.verbose:
                 print("Calculating CFT.")
             if params.detector == "classic":
+                print("Classic STA/LTA detection in progress...")
+                print(f"STA = {params.STA} s | LTA = {params.LTA} s | On = {params.on} | Off = {params.off}")
                 cft = trigger.classic_sta_lta(tr.data, int(fs * params.STA), int(fs * params.LTA))
             elif params.detector == "recursive":
+                print("Recursive STA/LTA detection in progress...")
+                print(f"STA = {params.STA} s | LTA = {params.LTA} s | On = {params.on} | Off = {params.off}")
+                print(int(fs * params.STA), int(fs * params.LTA))
                 cft = trigger.recursive_sta_lta(tr.data, int(fs * params.STA), int(fs * params.LTA))
             elif params.detector == "z":
+                print("Z-detector detection in progress...")
                 cft = trigger.z_detect(tr.data, int(fs * 3))
             if params.verbose:
                 print("Locating triggers.")
