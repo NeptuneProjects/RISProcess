@@ -410,9 +410,11 @@ def read_stream(params):
 
         # try:
         if count == 0:
-            st = read(f"{params.sourcepath}/MSEED/{filespec}")
+            # st = read(f"{params.sourcepath}/MSEED/{filespec}")
+            st = read(f"{params.sourcepath}/{filespec}")
         else:
-            st += read(f"{params.sourcepath}/MSEED/{filespec}")
+            # st += read(f"{params.sourcepath}/MSEED/{filespec}")
+            st += read(f"{params.sourcepath}/{filespec}")
         count += 1
         # except:
             # pass
