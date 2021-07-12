@@ -388,22 +388,31 @@ def read_stream(params):
     count = 0
     for i, dt in enumerate(dts):
         if params.name_format == 1:
-            filespec = f"{params.network}.{params.station}.{params.channel}.{dt.year}.{dt.dayofyear:03d}.mseed"
+            filespec = f"/{params.network}/{params.station}/{params.network}.{params.station}.{params.channel}.{dt.year}.{dt.dayofyear:03d}.mseed"
         elif params.name_format == 2:
             filespec = f"{params.network}.{params.station}..{params.channel}__{dt.year}{dt.month:02d}{dt.day:02d}T*"
 
-        if count == 0:
-            try:
+        # if count == 0:
+        #     try:
+        #         st = read(f"{params.sourcepath}/MSEED/{filespec}")
+        #         count += 1
+        #     except:
+        #         pass
+        # else:
+        #     try:
+        #         st += read(f"{params.sourcepath}/MSEED/{filespec}")
+        #         count += 1
+        #     except:
+        #         pass
+        try:
+            if count == 0:
                 st = read(f"{params.sourcepath}/MSEED/{filespec}")
-                count += 1
-            except:
-                pass
-        else:
-            try:
+            else:
                 st += read(f"{params.sourcepath}/MSEED/{filespec}")
-                count += 1
-            except:
-                pass
+            count += 1
+        except:
+            pass
+
     if count > 0:
         st.merge()
         st.trim(
