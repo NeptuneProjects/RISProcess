@@ -8,11 +8,9 @@ January 2021
 """
 from copy import deepcopy
 import os
-# import warnings
 
 import numpy as np
 import obspy
-# from obspy.io.mseed import InternalMSEEDReadingWarning
 from obspy.signal import trigger
 import pandas as pd
 

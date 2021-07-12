@@ -395,19 +395,6 @@ def read_stream(params):
         elif params.name_format == 2:
             filespec = f"{params.network}.{params.station}..{params.channel}__{dt.year}{dt.month:02d}{dt.day:02d}T*"
 
-        # if count == 0:
-        #     try:
-        #         st = read(f"{params.sourcepath}/MSEED/{filespec}")
-        #         count += 1
-        #     except:
-        #         pass
-        # else:
-        #     try:
-        #         st += read(f"{params.sourcepath}/MSEED/{filespec}")
-        #         count += 1
-        #     except:
-        #         pass
-
         try:
             if count == 0:
                 # st = read(f"{params.sourcepath}/MSEED/{filespec}")
