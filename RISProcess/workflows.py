@@ -124,8 +124,6 @@ def process_data(params):
         if not os.path.exists(path):
             os.makedirs(path)
         for tr in st:
-            print(tr)
-            tr.plot()
             fs = tr.stats.sampling_rate
             catalogue = pd.DataFrame(columns=["network", "station", "channel", "dt_on", "dt_off", "dt_peak", "peak", "unit", "fs", "delta", "npts", "STA", "LTA", "on", "off"])
             if not os.path.exists(f"{path}/catalogue.csv"):
