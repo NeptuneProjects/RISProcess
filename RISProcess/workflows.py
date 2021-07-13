@@ -135,26 +135,16 @@ def process_data(params):
             if params.detector == "classic":
                 cft = trigger.classic_sta_lta(tr.data, int(fs * params.STA), int(fs * params.LTA))
             elif params.detector == "recursive":
-                if count == 0:
-                    print("Recursive STA/LTA detection in progress...")
-                    print(f"STA = {params.STA} s | LTA = {params.LTA} s | On = {params.on} | Off = {params.off}")
-                    print(int(fs * params.STA), int(fs * params.LTA))
                 cft = trigger.recursive_sta_lta(tr, int(fs * params.STA), int(fs * params.LTA))
             elif params.detector == "z":
-                print("Z-detector detection in progress...")
                 cft = trigger.z_detect(tr.data, int(fs * 3))
             if params.verbose:
                 print("Locating triggers.")
-            print(cft.max())
             on_off = trigger.trigger_onset(cft, params.on, params.off)
-            print('Before')
-            print(on_off)
             if isinstance(on_off, list):
                 del catalogue
                 continue
             on_off = on_off[(time[on_off[:,0]] >= params.start) & (time[on_off[:,0]] < params.stop), :]
-            print('After')
-            print(on_off)
             nrows = on_off.shape[0]
             catalogue["network"] = [tr.stats.network for i in range(nrows)]
             catalogue["station"] = [tr.stats.station for i in range(nrows)]
