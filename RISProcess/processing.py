@@ -407,7 +407,7 @@ def read_stream(params):
             # pass
 
     if count > 0:
-        st.merge()
+        st.merge(fill_value="interpolate", interpolation_samples=1)
         st.trim(
             starttime=UTCDateTime(params.start_processing),
             endtime=UTCDateTime(params.stop_processing)

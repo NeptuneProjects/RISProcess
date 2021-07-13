@@ -94,7 +94,6 @@ def process_data(params):
     int
         Number of files saved to disk.
     """
-    # warnings.simplefilter("ignore", category=InternalMSEEDReadingWarning)
     st = processing.pipeline(params)
     if st == 0:
         return 0

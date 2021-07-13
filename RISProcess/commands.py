@@ -10,6 +10,8 @@ import argparse
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from copy import deepcopy
 from datetime import datetime
+import os
+import sys
 
 import pandas as pd
 from tqdm import tqdm
@@ -67,8 +69,7 @@ def dlfdsn():
     FDSN_downloader(**config("r", path=args.path))
 
 
-def process():
-    print(__name__)
+def process(**kwargs):
     """This command line function, processes, and saves raw MSEED seismic data.
     Functions available allow for filtering, decimation, and instrument
     response removal. Single- and multi-core processing are available.
@@ -81,12 +82,16 @@ def process():
         configuration file.
     """
     tic = datetime.now()
-    parser = argparse.ArgumentParser(
-        description="Command-line tool for processing RIS seismic data."
-    )
-    parser.add_argument("path", help="Path to config file")
-    args = parser.parse_args()
-    params = SignalProcessing(**config("r", path=args.path))
+    if os.isatty(sys.stdin.fileno()):
+        parser = argparse.ArgumentParser(
+            description="Command-line tool for processing RIS seismic data."
+        )
+        parser.add_argument("path", help="Path to config file")
+        args = parser.parse_args()
+        path = args.path
+    else:
+        path=kwargs["path"]
+    params = SignalProcessing(**config("r", path=path))
     print("=" * 79)
     print(f"Processing data.  Workers: {params.num_workers}")
     start_search = params.start.floor('D')
