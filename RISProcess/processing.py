@@ -307,7 +307,7 @@ def pipeline(params):
         print("Removing gap traces.")
     st = remove_gap_traces(st)
     # If only reading stream, function returns stream here.
-    if params.mode == "detect":
+    if params.mode == "detect" or params.mode == "cat2h5_pp":
         return st
     # Detrend data
     if params.verbose:

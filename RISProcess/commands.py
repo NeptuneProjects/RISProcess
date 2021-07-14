@@ -124,7 +124,7 @@ def process(**kwargs):
             print(f"{count} files saved to {params.writepath}")
         elif params.mode == "detect":
             print(f"{count} detections; catalogue saved to {params.writepath}")
-    elif params.mode == "cat2h5":
+    elif params.mode == "cat2h5" or params.mode == "cat2h5_pp":
         init_h5datasets(params)
         if params.num_workers == 1:
             for a in tqdm(A, **pbargs):
