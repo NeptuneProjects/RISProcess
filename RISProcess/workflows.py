@@ -107,12 +107,14 @@ def process_data(params):
         )
         count = 0
         for tr in st:
-            path = f"{params.writepath}/MSEED/{tr.stats.network}/{tr.stats.station}"
+            # path = f"{params.writepath}/MSEED/{tr.stats.network}/{tr.stats.station}"
+            path = os.path.join(params.writepath, "MSEED", tr.stats.network, tr.stats.station)
             if not os.path.exists(path):
                 os.makedirs(path)
             fname = f"{tr.stats.network}.{tr.stats.station}.{tr.stats.channel}.{params.start.year}.{params.start.dayofyear:03d}.mseed"
             tr.data = tr.data.astype("float32")
-            tr.write(f"{path}/{fname}", format="MSEED", encoding=4)
+            # tr.write(f"{path}/{fname}", format="MSEED", encoding=4)
+            tr.write(os.path.join(path, fname), format="MSEED", encoding=4)
             count += 1
         return count
 
@@ -126,8 +128,10 @@ def process_data(params):
         for tr in st:
             fs = tr.stats.sampling_rate
             catalogue = pd.DataFrame(columns=["network", "station", "channel", "dt_on", "dt_off", "dt_peak", "peak", "unit", "fs", "delta", "npts", "STA", "LTA", "on", "off"])
-            if not os.path.exists(f"{path}/catalogue.csv"):
-                catalogue.to_csv(f"{path}/catalogue.csv", mode="a", index=False)
+            # if not os.path.exists(f"{path}/catalogue.csv"):
+            if not os.path.exists(os.path.join(path, "catalogue.csv")):
+                # catalogue.to_csv(f"{path}/catalogue.csv", mode="a", index=False)
+                catalogue.to_csv(os.path.join(path, "catalogue.csv"), mode="a", index=False)
             secs = np.arange(0, tr.stats.npts * tr.stats.delta, tr.stats.delta)
             time = params.start_processing + pd.to_timedelta(secs, unit="sec")
             if params.verbose:
@@ -162,7 +166,8 @@ def process_data(params):
             catalogue["LTA"] = [params.LTA for i in range(nrows)]
             catalogue["on"] = [params.on for i in range(nrows)]
             catalogue["off"] = [params.off for i in range(nrows)]
-            catalogue.to_csv(f"{path}/catalogue.csv", mode="a", index=False, header=False)
+            # catalogue.to_csv(f"{path}/catalogue.csv", mode="a", index=False, header=False)
+            catalogue.to_csv(os.path.join(path, "catalogue.csv"), mode="a", index=False, header=False)
             if params.verbose:
                 print("Catalogue built.")
             del catalogue

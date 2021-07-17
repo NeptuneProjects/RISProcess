@@ -8,6 +8,7 @@ January 2021
 """
 from datetime import datetime
 import json
+import os
 import warnings
 
 import numpy as np
@@ -28,7 +29,8 @@ class SignalProcessing():
             mode,
             sourcepath='.',
             name_format=1,
-            writepath='./ProcessedData',
+            # writepath='./ProcessedData',
+            writepath=os.path.join('.', 'ProcessedData'),
             catalogue='.',
             parampath='.',
             network='*',
@@ -145,7 +147,8 @@ class SignalProcessing():
             path = self.parampath
 
         params = {str(key): str(value) for key, value in self.__dict__.items()}
-        with open(f'{path}/params_{self.mode}.json', 'w') as f:
+        # with open(f'{path}/params_{self.mode}.json', 'w') as f:
+        with open(os.path.join(path, f'params_{self.mode}.json'), 'w') as f:
             json.dump(params, f)
 
 
@@ -357,7 +360,8 @@ def read_stationXML(sourcepath, network, station):
         Obspy Inventory object; contains instrument response information.
     """
     filespec = f"{network}.{station}.xml"
-    inv = read_inventory(f"{sourcepath}/StationXML/{filespec}")
+    # inv = read_inventory(f"{sourcepath}/StationXML/{filespec}")
+    inv = read_inventory(os.path.join(sourcepath, "StationXML", filespec))
     return inv
 
 
@@ -388,19 +392,24 @@ def read_stream(params):
     count = 0
     for i, dt in enumerate(dts):
         if params.name_format == 1:
+            fname = f"{params.network}.{params.station}.{params.channel}.{dt.year}.{dt.dayofyear:03d}.mseed"
             if params.station == "*":
-                filespec = f"{params.network}/**/{params.network}.{params.station}.{params.channel}.{dt.year}.{dt.dayofyear:03d}.mseed"
+                # filespec = f"{params.network}/**/{params.network}.{params.station}.{params.channel}.{dt.year}.{dt.dayofyear:03d}.mseed"
+                filespec = os.path.join(params.network, "**", fname)
             else:
-                filespec = f"{params.network}/{params.station}/{params.network}.{params.station}.{params.channel}.{dt.year}.{dt.dayofyear:03d}.mseed"
+                # filespec = f"{params.network}/{params.station}/{params.network}.{params.station}.{params.channel}.{dt.year}.{dt.dayofyear:03d}.mseed"
+                filespec = os.path.join(params.network, params.station, fname)
         elif params.name_format == 2:
             filespec = f"{params.network}.{params.station}..{params.channel}__{dt.year}{dt.month:02d}{dt.day:02d}T*"
 
         try:
             if count == 0:
-                st = read(f"{params.sourcepath}/MSEED/{filespec}")
+                # st = read(f"{params.sourcepath}/MSEED/{filespec}")
+                st = read(os.path.join(params.sourcepath, "MSEED", filespec))
                 # st = read(f"{params.sourcepath}/{filespec}")
             else:
-                st += read(f"{params.sourcepath}/MSEED/{filespec}")
+                # st += read(f"{params.sourcepath}/MSEED/{filespec}")
+                st += read(os.path.join(params.sourcepath, "MSEED", filespec))
                 # st += read(f"{params.sourcepath}/{filespec}")
             count += 1
         except:

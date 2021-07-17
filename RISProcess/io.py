@@ -47,7 +47,8 @@ def config(mode, path=".", parameters=None):
             config = configparser.ConfigParser()
             config.optionxform = str
             config["PARAMETERS"] = parameters
-            fname = f"{path}/config_{parameters['mode']}.ini"
+            # fname = f"{path}/config_{parameters['mode']}.ini"
+            fname = os.path.join(path, f"config_{parameters['mode']}.ini")
             with open(fname, "w") as configfile:
                 config.write(configfile)
             return fname
@@ -237,8 +238,10 @@ def FDSN_downloader(
     stop  = UTCDateTime(stop)
 
     if not os.path.exists(datapath):
-        os.makedirs(f'{datapath}/MSEED')
-        os.makedirs(f'{datapath}/StationXML')
+        # os.makedirs(f'{datapath}/MSEED')
+        os.makedirs(os.path.join(datapath, 'MSEED'))
+        # os.makedirs(f'{datapath}/StationXML')
+        os.makedirs(os.path.join(datapath, 'StationXML'))
 
     domain = RectangularDomain(
         minlatitude=-85,
@@ -264,8 +267,10 @@ def FDSN_downloader(
     mdl.download(
         domain,
         restrictions,
-        mseed_storage=f"{datapath}/MSEED",
-        stationxml_storage=f"{datapath}/StationXML"
+        # mseed_storage=f"{datapath}/MSEED",
+        mseed_storage=os.path.join(datapath, 'MSEED'),
+        # stationxml_storage=f"{datapath}/StationXML"
+        stationxml_storage=os.path.join(datapath, 'StationXML'),
     )
 
     logger = logging.getLogger("obspy.clients.fdsn.mass_downloader")
