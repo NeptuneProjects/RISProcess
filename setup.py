@@ -27,7 +27,7 @@ def setup_package():
             "scipy",
             "tqdm"
         ],
-        version="0.0b",
+        version="0.3b",
         license="MIT",
         description="Package provides signal processing workflow for seismic data \
             collected on the Ross Ice Shelf, Antarctica."
