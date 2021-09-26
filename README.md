@@ -4,11 +4,15 @@ data that were collected on the Ross Ice Shelf (RIS), Antarctica, from 2014-
 2017.  The package is built using [Obspy](https://docs.obspy.org), h5py, and a
 number of other libraries.
 
-This package is used to build the data sets required for the deep embedded
-clustering project, [RISCluster](https://github.com/NeptuneProjects/RISCluster).  
-Details on the clustering project are available in [Jenkins et al.](https://www.essoar.org/doi/abs/10.1002/essoar.10505894.1)
+This package is used to build the data set required for the deep clustering
+project, [RISCluster](https://github.com/NeptuneProjects/RISCluster).  Details
+on the clustering project are available in
+[Jenkins et al.](https://doi.org/10.1029/2021JB021716).
 
-Information on the data set can be found at [FDSN](https://www.fdsn.org/networks/detail/XH_2014/). The project is documented in [Bromirski et al.](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015GL065284)
+Information about the seismic data set can be found at
+[FDSN](https://www.fdsn.org/networks/detail/XH_2014/).  The project for which
+the data were collected is documented in
+[Bromirski et al.](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015GL065284).
 
 ## Installation
 Pre-requisites:
@@ -30,17 +34,21 @@ The following steps will set up a Conda environment and install RISProcess.
 environment by running `conda activate RISProcess` in terminal.
 
 ## Usage
-The Jupyter notebook, **[RISProcess.ipynb](https://github.com/NeptuneProjects/RISProcess/blob/master/RISProcess.ipynb)**, provides an outline of general usage and workflow.
-There are two components to the worfklow: setting up configuration files, and executing scripts.
-The configuration files can be set up manually (not recommended), or using the provided notebook.
-Scripts are executed from the terminal, with recommended commands printed within the notebook.
-Copy and paste the commands from the notebook into terminal, taking care to ensure the working
-directories and path names are consistent. Due to irregularities that can arise from
-executing command line functions from within the iPython kernel, I chose to avoid calling commands
-from within the notebook.
+The Jupyter notebook,
+**[RISProcess.ipynb](https://github.com/NeptuneProjects/RISProcess/blob/master/RISProcess.ipynb)**,
+provides an outline of general usage and workflow.  There are two components to
+the worfklow: setting up configuration files, and executing scripts. The
+configuration files can be set up manually (not recommended), or using the
+provided notebook. Scripts are executed from the terminal, with recommended
+commands printed within the notebook. Copy and paste the commands from the
+notebook into terminal, taking care to ensure the working directories and path
+names are consistent. Due to irregularities that can arise from executing
+command line functions from within the iPython kernel, I chose to avoid calling
+commands from within the notebook.
 
 ## Author
 William Jenkins
+<br>wjenkins [@] ucsd [dot] edu
 <br>Scripps Institution of Oceanography
-<br>UC San Diego
-<br>La Jolla, California
+<br>University of California San Diego
+<br>La Jolla, California, USA
